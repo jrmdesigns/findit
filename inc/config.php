@@ -25,6 +25,16 @@
 			$productsData[] = $rowd;
 		}
 
+
+		$citiesSql = "SELECT * FROM cities";
+		$citiesResult = mysqli_query($dbConnect, $citiesSql);
+		$citiesData = array();
+		while ($rowd = mysqli_fetch_assoc($citiesResult))
+		{
+			$citiesData[] = $rowd;
+		}
+
+
 		//$categoriesOrdered = "SELECT * "
 	}
 ?>

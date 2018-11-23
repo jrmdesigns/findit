@@ -1,50 +1,12 @@
-<?php
-require_once("inc/header.php");
-?>
-<section id="newest-products-container" style="padding: 70px;">
-
-<section style="display: flex; justify-content: space-between; padding: 0px 20px">
-<h1>producten</h1>
-<section style="width: 50%; display: flex; margin-right: 6px;">
-<select name="filter" id="filter" style="width:40%">
-	<option value="">Filteren</option>
-	<?php
-		foreach($citiesData as $row){
-				$result = "<option value='";
-				$result .= $row["ID"];
-				$result .= "'>";
-				$result .= $row["CityName"];
-				$result .= "</option>";
-				echo $result;
-			}
-			?>
-</select>
-<script>
-
-</script>
-
-<select name="sort" id="sort" style="width:40%">
-	<option value="">sorteren</option>
-	<option value="price">prijs</option>
-</select>
-
-<button style="width: 20%" id="clearfilters">
-	Leeg filters
-</button>
-</section>
-<script>
-<?php if(isset($_GET["id"])){
-	$id = $_GET["id"];
-}?>
 cityValue = "";
-sortValue = "";
-
+sortValue = "" ;
+id = "";
 $("#sort").change(function(){
     sortValue = this.value;
     if(this.value = ""){
 
         if(cityValue != ""){
-            if(id == undefined){
+            if(id == ""){
                 ajax("query.php", "city", cityValue);
                 console.log("unsorted with city without id");
             } else{
@@ -53,7 +15,7 @@ $("#sort").change(function(){
             }
 
         } else{
-            if(id == undefined){
+            if(id == ""){
                 ajax("query.php")
                 console.log("show unsorted without id");
             } else {
@@ -63,7 +25,7 @@ $("#sort").change(function(){
         }
     } else{
         if(cityValue != ""){
-            if(id == undefined)
+            if(id == "")
             {
                 ajax("query.php", "city", cityValue, "sort", "true");
                 console.log("sort with city");
@@ -71,7 +33,7 @@ $("#sort").change(function(){
                 ajax("query.php", "id", id, "city", cityValue, "sort", "true");
             }
         } else{
-            if(id == undefined)
+            if(!isNaN(id))
             {
                 console.log("show sorted without value and id");
                 ajax("query.php", "sort", "true");
@@ -88,7 +50,7 @@ $("#filter").change(function(){
     if(this.value = ""){
 
         if(sortValue != ""){
-            if(id == undefined){
+            if(id == ""){
                 ajax("query.php",  "sort", "true");
                 console.log("no filter without city and id");
             } else{
@@ -97,7 +59,7 @@ $("#filter").change(function(){
             }
 
         } else{
-            if(id == undefined){
+            if(id == ""){
                 ajax("query.php")
                 console.log("no filter without sort without id");
             } else {
@@ -107,7 +69,7 @@ $("#filter").change(function(){
         }
     } else{
         if(sortValue != ""){
-            if(id == undefined)
+            if(id == "")
             {
                 ajax("query.php", "city", cityValue, "sort", "true");
                 console.log("sort with city");
@@ -115,7 +77,7 @@ $("#filter").change(function(){
                 ajax("query.php", "id", id, "city", cityValue, "sort", "true");
             }
         } else{
-            if(id == undefined)
+            if(id == "")
             {
                 console.log("show sorted without value and id");
                 ajax("query.php", "city", cityValue);
@@ -127,13 +89,9 @@ $("#filter").change(function(){
     }
 });
 
-function ajax(PageTo, firstParam, FirstValue, secParam, secValue, thirdParam, thirdValue){
+function ajax(PageTo, firstParam, FirstValue, secParam, secValue){
     console.log("ajax");
-
-    if(thirdParam != undefined){
-    	 output = PageTo + "?" + firstParam + "=" + FirstValue + "&" + secParam + "=" + secValue + "&" + thirdParam + "=" + thirdValue; 
-    }
-    else if(secParam != undefined){
+    if(secParam != undefined){
         output = PageTo + "?" + firstParam + "=" + FirstValue + "&" + secParam + "=" + secValue; 
     } else if(firstParam != undefined){
         output = PageTo + "?" + firstParam + "=" + FirstValue;
@@ -145,42 +103,3 @@ function ajax(PageTo, firstParam, FirstValue, secParam, secValue, thirdParam, th
         $("#newest-products").html(result);
     }});
 }
-
-window.onload = function(){
-	id = window.location.search.substr(1).split('=')[1];
-	if(id == undefined){
-		ajax("query.php");
-	} else {
-		ajax("query.php?id=" + id);
-	}
-
-		subMenu = document.getElementById("submenu");
-	loginMenu = document.getElementById("login");
-	menuOn = false;
-	loginOn = false;
-}
-
-$("#clearfilters").click(function(){
-	if(id == undefined){
-		ajax("query.php");
-	} else {
-		ajax("query.php?id=" + id);
-	}
-	$("#filter").val = "";
-	$("#sort").val = "";
-	sortValue = "";
-	cityValue = "";
-});
-</script>
-</section>
-<section id="newest-products">
-
-
-
-
-</section>
-
-</section>
-<?php
-require_once("inc/footer.php");
-?>

@@ -10,11 +10,15 @@ a{
 	color: #116db4;
 }
 
+.debug{
+	border: 1px solid red;
+}
+
 #header-bar{
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	background-color: #f7f7f6;
-	padding: 10px;
+	padding: 20px 92px;
 }
 
 #header-bar a{
@@ -25,7 +29,7 @@ a{
 	color: #000;
 }
 #search-group{
-	width: 35%;
+	width: 65%;
 }
 
 select{
@@ -76,6 +80,7 @@ input[type=submit]:hover, button:hover{
 display: none;
 background-color: #f7f7f6;
 position: fixed;
+z-index: 999;
 left:0;
 width: 17.75%;
 border-top: 1px solid lightgrey;
@@ -92,35 +97,31 @@ border-top: 1px solid lightgrey;
 }
 
 #submenu ul li:hover{
-	background-color: grey;
+	background-color: #116db4;
 }
 
 #submenu ul a:hover{
-	color: #000;
+	color: #fff;
 }
 
 #login{
 	display: none;
-	width: 15%;
-	min-width: 200px;
+	width: 520px;
+	min-height: 200px;
 	position: fixed;
 	background-color: #f7f7f6;
 	border-top: 1px solid lightgrey;
 	padding-top: 10px;
-	right:17.25%;
+	right:45.75%;
 }
 
-#login form{
-	width: 90%;
-	margin: 0 auto;
+#login ul{
+	list-style-type: none;
 }
 
-#login form input{
-	width: 100%;
-	margin: 0px 0px 10px;
+#login ul li{
+	padding: 10px;
 }
-
-
 
 
 
@@ -151,21 +152,77 @@ border-top: 1px solid lightgrey;
 
 #newest-products
 {
-	display: grid;
+/*	display: grid;
 	grid-template-columns: repeat(4, 24%);
-	grid-gap:20px;
+	grid-gap:20px;*/
+
+	display: flex;
+	/*justify-content: space-between;*/
+	flex-wrap: wrap;
 }
 
-#newest-products article{
+#newest-products a {
+	flex: 0 0 20.5%;
+	margin: 20px;
 	background-color: #fff;
 	text-align: center;
 	padding: 10px;
+	max-height: 500px;
+	transition: all .5s;
+}
+
+#newest-products a:hover{
+-webkit-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+box-shadow: 0px 0px 15px 0px rgba(0,0,0,0.75);
+	outline: 3px solid #038fe0;
+	outline-offset: -3px;
+}
+
+#newest-products article:hover{
 }
 
 #newest-products article img{
-	max-width: 25%;
-	max-height: 25%;
+	width: 200px;
+	height: 200px;
 }
 body{
 
+}
+
+#newest-products article .price{
+	display: inline-block;
+	position: absolute;
+	border-radius: 50%;
+	background-color: #038fe0;
+	height: 50px;
+	width: 50px;
+	line-height: 50px;
+	padding: 10px;
+	font-weight: bold;
+	font-size: 20px;
+	transform: translate(50px, -250px);
+	color: #f7fcfb;	
+}
+
+.reviewsimages {
+	position: absolute;
+	display: flex;
+	flex-direction: column;
+	transform: translate(10px, -300px);
+	margin-bottom: 15px;
+}
+
+.reviewsimages img{
+	max-height: 22px;
+	max-width: 22px;
+}
+
+.reviewsimages a{
+	line-height: 22px;
+	margin-left: 5px;
+}
+
+.reviewsimages .halfstar{
+	max-width: 11px;
 }
